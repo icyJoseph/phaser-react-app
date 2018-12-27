@@ -25,8 +25,8 @@ class App extends Component {
 
   resizeGame = () => {
     const { innerWidth } = window;
-    const width = innerWidth;
-    const height = (width * 4) / 3;
+    const width = innerWidth > MAX_WIDTH ? MAX_WIDTH : innerWidth;
+    const height = (width * 9) / 16;
     return this.game.resize(width, height);
   };
 
