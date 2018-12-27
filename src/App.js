@@ -1,25 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+
+import Phaser from "phaser";
+import SceneMain from "./game";
+
+const config = {
+  type: Phaser.AUTO,
+  width: 640,
+  height: 480,
+  parent: "phaser-game-container",
+  scene: SceneMain
+};
+
+const MAX_WIDTH = 960;
 
 class App extends Component {
+  componentDidMount() {
+    window.addEventListener("optimizedResize", this.resizeGame);
+    const { innerWidth } = window;
+    const width = innerWidth > MAX_WIDTH ? MAX_WIDTH : innerWidth;
+    const height = (width * 9) / 16;
+    this.game = new Phaser.Game({ ...config, width, height });
+  }
+
+  resizeGame = () => {
+    const { innerWidth } = window;
+    const width = innerWidth;
+    const height = (width * 4) / 3;
+    return this.game.resize(width, height);
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener("optimizedResize", this.resizeGame);
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>React-Phaser-Game</h1>
+        <div id="phaser-game-container" />
+        <p>Bottom Content</p>
       </div>
     );
   }
