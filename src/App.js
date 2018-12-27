@@ -37,9 +37,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>React-Phaser-Game</h1>
+        <h1>Phaser Game with CRA</h1>
         <div id="phaser-game-container" />
-        <p>Bottom Content</p>
+        <p>Boilerplate to combine both technologies.</p>
       </div>
     );
   }
