@@ -1,22 +1,38 @@
 import { Scene } from "phaser";
-import logo from "../logo.svg";
+import adventurer from "../assets/adventurer.png";
 
 export class SceneMain extends Scene {
   constructor() {
     super("SceneMain");
   }
   preload() {
-    this.load.image("logo", logo);
+    this.load.spritesheet("adventurer", adventurer, {
+      frameWidth: 50,
+      frameHeight: 37
+    });
   }
+
   create() {
-    this.logo = this.add.image(
+    this.adventurer = this.add.sprite(
       this.game.config.width / 2,
-      this.game.config.height / 2,
-      "logo"
+      this.game.config.height / 2
     );
-    this.logo.setOrigin(0.5, 0.5);
-    this.logo.alpha = 0.5;
+
+    this.anims.create({
+      key: "walk",
+      frames: [
+        { key: "adventurer", frame: 0 },
+        { key: "adventurer", frame: 1 },
+        { key: "adventurer", frame: 2 },
+        { key: "adventurer", frame: 3 },
+        { key: "adventurer", frame: 4 }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
+    console.log(this);
     console.log("Ready!");
+    this.adventurer.play("walk");
   }
   update() {}
 }
