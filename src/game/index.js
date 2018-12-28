@@ -18,15 +18,13 @@ export class SceneMain extends Scene {
       this.game.config.height / 2
     );
 
+    this.adventurer.setScale(1.5);
+
+    const frames = this.anims.generateFrameNumbers("adventurer");
+
     this.anims.create({
       key: "walk",
-      frames: [
-        { key: "adventurer", frame: 0 },
-        { key: "adventurer", frame: 1 },
-        { key: "adventurer", frame: 2 },
-        { key: "adventurer", frame: 3 },
-        { key: "adventurer", frame: 4 }
-      ],
+      frames,
       frameRate: 8,
       repeat: -1
     });
