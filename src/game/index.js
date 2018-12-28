@@ -13,11 +13,9 @@ export class SceneMain extends Scene {
   }
 
   create() {
-    this.adventurer = this.add.sprite(
-      this.game.config.width / 2,
-      this.game.config.height / 2
-    );
+    this.adventurer = this.add.sprite(0, this.game.config.height / 2);
 
+    // this.adventurer.setSize(50, 37, true);
     this.adventurer.setScale(1.5);
 
     const frames = this.anims.generateFrameNumbers("adventurer");
@@ -28,10 +26,27 @@ export class SceneMain extends Scene {
       frameRate: 8,
       repeat: -1
     });
-    console.log(this);
-    console.log("Ready!");
+
     this.adventurer.play("walk");
+    this.doWalk();
   }
+
+  doWalk() {
+    this.tweens.add({
+      targets: this.adventurer,
+      duration: 5000,
+      x: this.game.config.width - 10,
+      onComplete: this.onCompleteHandler,
+      onCompleteParams: [this]
+    });
+  }
+
+  onCompleteHandler(tween, targets, scope) {
+    const char = targets[0];
+    char.x = 0;
+    scope.doWalk();
+  }
+
   update() {}
 }
 
