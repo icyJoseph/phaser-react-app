@@ -12,13 +12,13 @@ const config = {
   scene: SceneMain
 };
 
-const MAX_WIDTH = 960;
+const MAX_WIDTH = 920;
 
 class App extends Component {
   componentDidMount() {
     window.addEventListener("optimizedResize", this.resizeGame);
     const { innerWidth } = window;
-    const width = innerWidth > MAX_WIDTH ? MAX_WIDTH : innerWidth;
+    const width = innerWidth > MAX_WIDTH ? MAX_WIDTH : innerWidth - 20;
     const height = (width * 9) / 16;
     this.game = new Phaser.Game({ ...config, width, height });
   }

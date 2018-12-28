@@ -1,11 +1,16 @@
 import { Scene } from "phaser";
+import Background from "./background";
 import adventurer from "../assets/adventurer.png";
+
+import layer1 from "../assets/layer1.png";
 
 export class SceneMain extends Scene {
   constructor() {
     super("SceneMain");
   }
   preload() {
+    this.textures.addBase64("layer1", layer1);
+
     this.load.spritesheet("adventurer", adventurer, {
       frameWidth: 50,
       frameHeight: 37
@@ -13,9 +18,10 @@ export class SceneMain extends Scene {
   }
 
   create() {
-    this.adventurer = this.add.sprite(0, this.game.config.height / 2);
+    const background = new Background({ scene: this });
+    background.x = this.game.config.width / 2;
 
-    // this.adventurer.setSize(50, 37, true);
+    this.adventurer = this.add.sprite(0, this.game.config.height / 2);
     this.adventurer.setScale(1.5);
 
     const frames = this.anims.generateFrameNumbers("adventurer");
