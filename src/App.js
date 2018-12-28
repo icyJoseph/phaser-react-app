@@ -9,7 +9,13 @@ const config = {
   width: 640,
   height: 480,
   parent: "phaser-game-container",
-  scene: SceneMain
+  scene: SceneMain,
+  physics: {
+    default: "arcade",
+    arcade: {
+      debug: true
+    }
+  }
 };
 
 const MAX_WIDTH = 920;
